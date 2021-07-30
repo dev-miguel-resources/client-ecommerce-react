@@ -8,18 +8,40 @@ import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("ingenieromiguelch@gmail.com");
-  const [password, setPassword] = useState("123456");
+  const [password, setPassword] = useState("chillan2021");
   const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     if (user && user.token) history.push("/");
-  }, [user]);
+  }, [history, user]);
 
   let dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const result = await auth.signInWithEmailAndPassword(email, password);
+      console.log(result);
+      const { user } = result;
+      const idTokenResult = await user.getIdTokenResult();
+
+      dispatch({
+        type: "LOGGED_IN_USER",
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+      });
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      setLoading(false);
+    }
+  };
 
   const googleLogin = async () => {
     auth
@@ -51,7 +73,7 @@ const Login = ({ history }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your email"
-          autofocus
+          autoFocus
         />
       </div>
 

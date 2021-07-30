@@ -10,7 +10,7 @@ const Register = ({ history }) => {
 
   useEffect(() => {
     if (user && user.token) history.push("/");
-  }, [user]);
+  }, [history, user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ const Register = ({ history }) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email"
-        autofocus
+        autoFocus
       />
 
       <br />
