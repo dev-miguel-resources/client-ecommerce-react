@@ -18,7 +18,7 @@ const RegisterComplete = ({ history }) => {
       return;
     }
 
-    if (password.length < 6) {
+    if (password < 6) {
       toast.error("Password must be at least 6 characters long");
       return;
     }
@@ -56,7 +56,7 @@ const RegisterComplete = ({ history }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
-        autofocus
+        autoFocus
       />
       <br />
       <button type="submit" className="btn btn-raised">
