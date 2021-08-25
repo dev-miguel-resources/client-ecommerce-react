@@ -50,6 +50,7 @@ const CategoryCreate = () => {
         .then((res) => {
           setLoading(false);
           toast.error(`${res.data.name} deleted`);
+          loadCategories();
         })
         .catch((err) => {
           if (err.response.status === 400) {
