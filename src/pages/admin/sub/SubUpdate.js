@@ -17,6 +17,7 @@ const SubUpdate = ({ history, match }) => {
   useEffect(() => {
     loadCategories();
     loadSub();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadCategories = () =>

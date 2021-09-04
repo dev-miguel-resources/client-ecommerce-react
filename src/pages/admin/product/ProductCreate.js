@@ -35,10 +35,11 @@ const ProductCreate = () => {
 
   useEffect(() => {
     loadCategories();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadCategories = () =>
-    getCategories().then((c) => ({ ...values, categories: c.data }));
+    getCategories().then((c) => setValues({ ...values, categories: c.data }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +57,7 @@ const ProductCreate = () => {
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    console.log(e.target.name, "----", e.target.value);
+    console.log(e.target.name, " ---- ", e.target.value);
   };
 
   const handleCategoryChange = (e) => {
